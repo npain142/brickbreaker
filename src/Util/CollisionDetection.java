@@ -81,4 +81,8 @@ public class CollisionDetection {
     public void bounce(double x, double y) {
         Draw.bounce.add(new Bounce(x, y,0, 0));
     }
+
+    public void powerupCollision(double x, double y, double width, double height) {
+
+    }
 }

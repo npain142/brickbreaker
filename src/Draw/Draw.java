@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.IOException;
 
+import static java.awt.event.KeyEvent.VK_LEFT;
+import static java.awt.event.KeyEvent.VK_RIGHT;
+
 
 public class Draw extends JPanel {
 
@@ -31,9 +34,9 @@ public class Draw extends JPanel {
     public static ArrayList<Particle> particles = new ArrayList<>();
     public static ArrayList<Bounce> bounce = new ArrayList<>();
     public static ArrayList<Powerup> powerups = new ArrayList<>();
-    final BufferedImage platformImage = ImageIO.read(new File("D:\\Studium\\sommersemester23\\info-2\\training\\gui\\assets\\platform.png"));
-    final BufferedImage brickImage = ImageIO.read(new File("D:\\Studium\\sommersemester23\\info-2\\training\\gui\\assets\\brick.png"));
-    public Draw() throws IOException {
+    public static ArrayList<Ball> ballHelper = new ArrayList<>();
+
+    public Draw() {
 
         this.setLayout(null);
         this.setSize(Window.windowDimension);
@@ -53,17 +56,28 @@ public class Draw extends JPanel {
         Iterator<Particle> particleIterator = particles.iterator();
         Iterator<Bounce> bounceIterator = bounce.iterator();
         Iterator<Powerup> powerupIterator = powerups.iterator();
+        Iterator<Particle> tailIterator = ball.tail.iterator();
 
         //Draw.Draw Draw.Platform
         g.setColor(Color.red);
-        //g.fillRect((int) platform.getX(), (int) platform.getY(), platform.getWidth(), platform.getHeight());
-        g.drawImage(platformImage, (int)platform.getX(), (int) platform.getY(),platform.getWidth(), platform.getHeight(), null);
+        g.fillRect((int) platform.getX(), (int) platform.getY(), platform.getWidth(), platform.getHeight());
+
 
         //Draw.Draw Draw.Ball
         g.setColor(Color.WHITE);
         g.fillOval((int) ball.getX(), (int)ball.getY(), ball.getWidth(), ball.getHeight());
 
-        //COLLISIONANIMATIONS
+        while(tailIterator.hasNext()) {
+            Particle tmp = tailIterator.next();
+            if(tmp.opacity <= 0) {
+                tailIterator.remove();
+            }
+            g.setColor(new Color(255, 255, 255,(int) tmp.opacity));
+            g.fillRect((int) tmp.getX(), (int) tmp.getY(), tmp.getWidth(), tmp.getHeight());
+            tmp.transformTail();
+        }
+
+        //CollisionAnimations
 
         while(bounceIterator.hasNext()) {
             Bounce tmp = bounceIterator.next();
@@ -74,6 +88,8 @@ public class Draw extends JPanel {
             g.fillOval((int) tmp.getX(), (int) tmp.getY(), tmp.getWidth(), tmp.getHeight());
             tmp.transform();
         }
+
+
 
         while (particleIterator.hasNext()) {
             Particle tmp = particleIterator.next();
@@ -95,7 +111,7 @@ public class Draw extends JPanel {
         while(brickIterator.hasNext()) {
             Brick tmp = brickIterator.next();
             g.fillRect((int)tmp.getX(),(int) tmp.getY(),(int) tmp.getWidth(),(int) tmp.getHeight());
-            //g.drawImage(brickImage,(int) tmp.getX(), (int) tmp.getY(), (int) tmp.getWidth(), (int) tmp.getHeight(), Color.RED, null);
+
         }
 
         g.setColor(Color.pink);
@@ -117,18 +133,23 @@ public class Draw extends JPanel {
         @Override
         public void keyTyped(KeyEvent e) {
 
-            switch (e.getKeyChar()) {
-                case 'd':
-                    platform.dir = Directions.RIGHT;
-                    break;
-                case 'a':
-                    platform.dir = Directions.LEFT;
-                    break;
-            }
+
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
+
+            switch (e.getKeyCode()) {
+                case VK_RIGHT:
+                    platform.dir = Directions.RIGHT;
+                    platform.accX += 2;
+                    break;
+
+                case VK_LEFT:
+                    platform.dir = Directions.LEFT;
+                    platform.accX += 2;
+                    break;
+            }
 
         }
 

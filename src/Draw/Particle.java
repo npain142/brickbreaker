@@ -42,6 +42,11 @@ public class Particle {
         opacity -= .001;
     }
 
+    public void transformTail() {
+
+        opacity -= 1;
+    }
+
     public double getX() {
         return x;
     }

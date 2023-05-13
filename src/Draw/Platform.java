@@ -14,7 +14,8 @@ public class Platform {
 
         x = ((double) (Window.windowDimension.width / 2) - ((double) Window.insets.get("HORIZONTAL") / 2) - ((double)this.width / 2));
         y = ((Window.windowDimension.height) - (Window.insets.get("VERTICAL")) - (this.height));
-
+        accX = 1;
+        accY = 1;
 
         dir = Directions.DEFAULT;
     }
@@ -23,11 +24,19 @@ public class Platform {
     public void transform(double p) {
 
         switch (dir) {
-            case LEFT -> x -= p;
-            case RIGHT -> {
-                x += p;
+            case LEFT:
+                x -= p * accX;
                 break;
-            }
+
+            case RIGHT:
+                x += p * accX;
+                break;
+
+        }
+
+        if(accX > 1 || accY > 1) {
+            accX -= .1;
+            accY -= .1;
         }
     }
 
