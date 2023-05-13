@@ -1,3 +1,8 @@
+package Draw;
+
+import Util.Directions;
+import Main.Window;
+
 public class Ball {
 
     private double x, y;

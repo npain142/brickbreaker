@@ -1,3 +1,5 @@
+package Draw;
+
 public class Brick {
 
     private double x, y;

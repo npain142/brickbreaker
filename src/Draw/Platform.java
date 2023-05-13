@@ -1,8 +1,12 @@
-import javax.swing.*;
+package Draw;
+
+
+import Util.Directions;
+import Main.Window;
 
 public class Platform {
 
-    private double x, y, accX, accY;
+    public double x, y, accX, accY;
     public Directions dir;
     public int width = 100, height = 10;
 

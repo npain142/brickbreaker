@@ -1,14 +1,15 @@
-import jdk.swing.interop.SwingInterOpUtils;
+package Draw;
+
+import Util.*;
+import Main.Window;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.IOException;
@@ -17,19 +18,19 @@ import java.io.IOException;
 public class Draw extends JPanel {
 
 
-    //Platform
+    //Draw.Platform
     public static Platform platform = new Platform();
     //Bricks
 
-    //Ball
+    //Draw.Ball
     public static Ball ball = new Ball();
-    //CollisionDetection
-    static CollisionDetection collisionDetection = new CollisionDetection(platform, ball);
-    static BrickFactory bf = new BrickFactory(10, 10);
+    //Util.CollisionDetection
+    public static CollisionDetection collisionDetection = new CollisionDetection(platform, ball);
+    public static BrickFactory bf = new BrickFactory(10, 10);
 
-    static ArrayList<Particle> particles = new ArrayList<>();
-    static ArrayList<Bounce> bounce = new ArrayList<>();
-    static ArrayList<Powerup> powerups = new ArrayList<>();
+    public static ArrayList<Particle> particles = new ArrayList<>();
+    public static ArrayList<Bounce> bounce = new ArrayList<>();
+    public static ArrayList<Powerup> powerups = new ArrayList<>();
     final BufferedImage platformImage = ImageIO.read(new File("D:\\Studium\\sommersemester23\\info-2\\training\\gui\\assets\\platform.png"));
     final BufferedImage brickImage = ImageIO.read(new File("D:\\Studium\\sommersemester23\\info-2\\training\\gui\\assets\\brick.png"));
     public Draw() throws IOException {
@@ -53,12 +54,12 @@ public class Draw extends JPanel {
         Iterator<Bounce> bounceIterator = bounce.iterator();
         Iterator<Powerup> powerupIterator = powerups.iterator();
 
-        //Draw Platform
+        //Draw.Draw Draw.Platform
         g.setColor(Color.red);
         //g.fillRect((int) platform.getX(), (int) platform.getY(), platform.getWidth(), platform.getHeight());
         g.drawImage(platformImage, (int)platform.getX(), (int) platform.getY(),platform.getWidth(), platform.getHeight(), null);
 
-        //Draw Ball
+        //Draw.Draw Draw.Ball
         g.setColor(Color.WHITE);
         g.fillOval((int) ball.getX(), (int)ball.getY(), ball.getWidth(), ball.getHeight());
 
@@ -89,7 +90,7 @@ public class Draw extends JPanel {
 
         }
 
-        //Draw Bricks
+        //Draw.Draw Bricks
         g.setColor(Color.blue);
         while(brickIterator.hasNext()) {
             Brick tmp = brickIterator.next();

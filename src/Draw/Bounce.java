@@ -1,3 +1,5 @@
+package Draw;
+
 import java.awt.*;
 
 public class Bounce {

@@ -1,3 +1,7 @@
+package Util;
+
+import Draw.Brick;
+import Main.Window;
 import java.util.ArrayList;
 
 public class BrickFactory {

@@ -1,3 +1,5 @@
+package Draw;
+
 import java.awt.*;
 import java.util.Random;
 

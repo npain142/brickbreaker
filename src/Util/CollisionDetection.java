@@ -1,3 +1,8 @@
+package Util;
+
+import Draw.*;
+import Main.*;
+
 import java.util.Iterator;
 import java.util.Random;
 

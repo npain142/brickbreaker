@@ -1,3 +1,5 @@
+package Draw;
+
 import java.util.Random;
 
 public class Powerup {
